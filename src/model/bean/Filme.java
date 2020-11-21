@@ -4,7 +4,7 @@ public class Filme {
 	private int idFilme;
 	private String titulo;
 	private int tempo;
-	private boolean imagem3d;
+	private boolean img3d;
 	private boolean dublado;
 	private String sinopse;
 	private String categoria;
@@ -34,11 +34,11 @@ public class Filme {
 	}
 
 	public boolean isImagem3d() {
-		return imagem3d;
+		return img3d;
 	}
 
-	public void setImagem3d(boolean imagem3d) {
-		this.imagem3d = imagem3d;
+	public void setImagem3d(boolean img3d) {
+		this.img3d = img3d;
 	}
 
 	public boolean isDublado() {
