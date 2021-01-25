@@ -83,6 +83,29 @@ public class JFCadastroFilme extends JFrame {
 		contentPane.add(txtCategoria);
 		txtCategoria.setColumns(10);
 		
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane.setBounds(236, 154, 53, -26);
+		contentPane.add(layeredPane);
+		
+		JLayeredPane layeredPane_1 = new JLayeredPane();
+		layeredPane_1.setBounds(230, 108, 165, 68);
+		contentPane.add(layeredPane_1);
+		
+		txtSinopse = new JTextField();
+		txtSinopse.setText("Sinopse");
+		txtSinopse.setBounds(0, 0, 165, 68);
+		layeredPane_1.add(txtSinopse);
+		txtSinopse.setColumns(10);
+		
+		JSpinner spinnerTempo = new JSpinner();
+		spinnerTempo.setBounds(79, 108, 29, 20);
+		contentPane.add(spinnerTempo);
+		
+		JLabel lblNewLabel_1 = new JLabel("Dura\u00E7\u00E3o");
+		lblNewLabel_1.setBounds(10, 108, 59, 20);
+		contentPane.add(lblNewLabel_1);
+		
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,26 +133,5 @@ public class JFCadastroFilme extends JFrame {
 		btnNewButton.setBounds(165, 208, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		layeredPane.setBounds(236, 154, 53, -26);
-		contentPane.add(layeredPane);
-		
-		JLayeredPane layeredPane_1 = new JLayeredPane();
-		layeredPane_1.setBounds(230, 108, 165, 68);
-		contentPane.add(layeredPane_1);
-		
-		txtSinopse = new JTextField();
-		txtSinopse.setText("Sinopse");
-		txtSinopse.setBounds(0, 0, 165, 68);
-		layeredPane_1.add(txtSinopse);
-		txtSinopse.setColumns(10);
-		
-		JSpinner spinnerTempo = new JSpinner();
-		spinnerTempo.setBounds(79, 108, 29, 20);
-		contentPane.add(spinnerTempo);
-		
-		JLabel lblNewLabel_1 = new JLabel("Dura\u00E7\u00E3o");
-		lblNewLabel_1.setBounds(10, 108, 59, 20);
-		contentPane.add(lblNewLabel_1);
 	}
 }
