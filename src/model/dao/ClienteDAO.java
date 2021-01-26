@@ -18,7 +18,7 @@ public class ClienteDAO {
 	public void create(Cliente c) {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
-		String sql = "INSERT INTO cliente (nome, cpf, email, phone) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO cliente (nome, cpf, email, telefone) VALUES (?, ?, ?, ?)";
 		
 		try {
 			stmt = con.prepareStatement(sql);

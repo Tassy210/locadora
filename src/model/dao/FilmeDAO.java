@@ -16,7 +16,7 @@ public class FilmeDAO {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = con.prepareStatement("INSERT INTO FILME (titulo, categoria, sinopse, tempo, imagem3d, dublado) VALUES"
+			stmt = con.prepareStatement("INSERT INTO FILME (titulo, categoria, sinopse, tempo, img3d, dublado) VALUES"
 					+ "(?,?,?,?,?,?)");
 			stmt.setString(1, f.getTitulo());
 			stmt.setString(2, f.getCategoria());
