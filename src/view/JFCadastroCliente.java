@@ -89,7 +89,7 @@ public class JFCadastroCliente extends JFrame {
 				Cliente c = new Cliente();
 				ClienteDAO dao = new ClienteDAO();
 				
-				c.setNome(txtNome.getText());
+				c.setName(txtNome.getText());
 				c.setCpf(txtCpf.getText());
 				c.setEmail(txtEmail.getText());
 				c.setTelefone(txtTelefone.getText());
@@ -154,4 +154,5 @@ public class JFCadastroCliente extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 
+}
 }
