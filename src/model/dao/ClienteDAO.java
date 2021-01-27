@@ -51,7 +51,7 @@ public class ClienteDAO {
 				Cliente m = new Cliente();
 				m.setId(rs.getInt("id"));
 				m.setName(rs.getString("Nome"));
-				m.setTelefone(rs.getString("phone"));
+				m.setTelefone(rs.getString("telefone"));
 				m.setEmail(rs.getString("email"));
 				m.setCpf(rs.getString("cpf"));
 				
@@ -85,7 +85,7 @@ public class ClienteDAO {
 			
 				m.setId(rs.getInt("id"));
 				m.setName(rs.getString("Nome"));
-				m.setTelefone(rs.getString("phone"));
+				m.setTelefone(rs.getString("telefone"));
 				m.setEmail(rs.getString("email"));
 				m.setCpf(rs.getString("cpf"));
 			}
