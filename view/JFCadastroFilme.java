@@ -130,8 +130,36 @@ public class JFCadastroFilme extends JFrame {
 				dao.create(f);
 			}
 		});
-		btnNewButton.setBounds(165, 208, 89, 23);
+		btnNewButton.setBounds(46, 227, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		
+		
+		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		
+		btnCancel.setBounds(280, 227, 89, 23);
+		contentPane.add(btnCancel);
+		
+		JButton btnClear = new JButton("Limpar");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtNome.setText("");
+				txtSinopse.setText("");
+				txtCategoria.setText("");
+				spinnerTempo.setValue(0);
+
+			}
+		});
+		btnClear.setBounds(160, 227, 89, 23);
+		contentPane.add(btnClear);
+		
+		
+		
 		
 	}
 }

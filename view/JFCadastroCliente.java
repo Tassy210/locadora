@@ -99,8 +99,21 @@ public class JFCadastroCliente extends JFrame {
 		});
 		
 		JButton btnClear = new JButton("Limpar");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtNome.setText("");
+				txtCpf.setText("");
+				txtEmail.setText("");
+				txtTelefone.setText("");
+			}
+		});
 		
 		JButton btnCancel = new JButton("Cancelar");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
