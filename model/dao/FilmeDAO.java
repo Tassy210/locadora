@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
+import model.bean.Cliente;
 import model.bean.Filme;
 
 public class FilmeDAO {
@@ -36,36 +37,117 @@ public class FilmeDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
-
+	
 	public List<Filme> read(){
-		
 		Connection con = ConnectionFactory.getConnection();
-		PreparedStatement stmt = null; 
-		ResultSet rs = null; 
-		List<Filme> filmes = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		List<Filme> movies = new ArrayList<>();
 		
 		try {
-			stmt = con.prepareStatement("SELECT * from filme;");
+			stmt = con.prepareStatement("SELECT * FROM filme");
 			rs = stmt.executeQuery();
+			
 			while(rs.next()) {
-				Filme f = new Filme();
-				f.setIdFilme(rs.getInt("idFilme"));
-				f.setTitulo(rs.getString("titulo"));
-				f.setTempo(rs.getInt("tempo"));
-				f.setSinopse(rs.getString("sinopse"));
-				f.setCategoria(rs.getString("categoria"));
-				f.setImagem3d(rs.getBoolean("img3d"));
-				f.setDublado(rs.getBoolean("dublado"));
-				filmes.add(f);
+				Filme m = new Filme();
+				m.setIdFilme(rs.getInt("idFilme"));
+				m.setTitulo(rs.getString("titulo"));
+				m.setTempo(rs.getInt("tempo"));
+				m.setDublado(rs.getBoolean("dublado"));
+				m.setCategoria(rs.getString("categoria"));
+				m.setImagem3d(rs.getBoolean("img3d"));
+				m.setSinopse(rs.getString("sinopse"));
+				
+				movies.add(m);
+				
 			}
 			
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro ao buscar as informações do banco: "+ e);
-			e.printStackTrace();
-			ConnectionFactory.closeConnection(con,stmt,rs);
+			JOptionPane.showMessageDialog(null, "Erro ao buscar as informações: " + e.getMessage());
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt, rs);
 		}
-		return filmes;
+		
+		return movies;
+	
+	}
+	
+	public Filme read(int idFilme) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Filme m = new Filme();
+		
+		try {
+			stmt = con.prepareStatement("SELECT * FROM filme WHERE id=? LIMIT 1");
+			stmt.setInt(1, idFilme);
+			rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				m.setIdFilme(rs.getInt("idFilme"));
+				m.setTitulo(rs.getString("titulo"));
+				m.setTempo(rs.getInt("tempo"));
+				m.setDublado(rs.getBoolean("dublado"));
+				m.setCategoria(rs.getString("categoria"));
+				m.setImagem3d(rs.getBoolean("img3d"));
+				m.setSinopse(rs.getString("sinopse"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt, rs);
+		}
+		
+		return m;
+	}
+	
+	public void update(Filme f) {
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("UPDATE movie SET title=?, length=?, dubbed=?, category=?, image3d=?, synopsis=? WHERE id=?");
+			
+			stmt.setString(1, f.getTitulo());
+			stmt.setString(6, f.getSinopse());
+			stmt.setInt(2, f.getTempo());
+			stmt.setBoolean(5, f.isImagem3d());
+			stmt.setBoolean(3, f.isDublado());
+			stmt.setString(4, f.getCategoria());
+			stmt.setInt(7, f.getIdFilme());
+			
+			stmt.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Mudanças salvas com sucesso");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar:" + e);
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
 		
 	}
-
+	
+	public void remove(int idFilme) {
+		
+		Connection con = ConnectionFactory.getConnection();
+		PreparedStatement stmt = null;
+		
+		try {
+			stmt = con.prepareStatement("DELETE FROM filme WHERE idFilme=?");
+			
+			stmt.setInt(1, idFilme);
+			stmt.executeUpdate();
+			
+			JOptionPane.showMessageDialog(null, "Filme excluído com sucesso!");
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao atualizar:" + e);
+			e.printStackTrace();
+		} finally {
+			ConnectionFactory.closeConnection(con, stmt);
+		}
+	}
 }

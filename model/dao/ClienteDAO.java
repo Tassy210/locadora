@@ -41,7 +41,7 @@ public class ClienteDAO {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<Cliente> clientes = new ArrayList<>();
+		List<Cliente> customers = new ArrayList<>();
 		
 		try {
 			stmt = con.prepareStatement("SELECT * FROM cliente");
@@ -50,12 +50,12 @@ public class ClienteDAO {
 			while(rs.next()) {
 				Cliente m = new Cliente();
 				m.setId(rs.getInt("id"));
-				m.setName(rs.getString("Nome"));
+				m.setName(rs.getString("nome"));
 				m.setTelefone(rs.getString("telefone"));
 				m.setEmail(rs.getString("email"));
 				m.setCpf(rs.getString("cpf"));
 				
-				clientes.add(m);
+				customers.add(m);
 				
 			}
 			
@@ -65,11 +65,11 @@ public class ClienteDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 		
-		return clientes;
+		return customers;
 	
 	}
 	
-	public Cliente read(int Id) {
+	public Cliente read(int clienteId) {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -77,14 +77,14 @@ public class ClienteDAO {
 		
 		try {
 			stmt = con.prepareStatement("SELECT * FROM cliente WHERE id=?");
-			stmt.setInt(1 , Id);
+			stmt.setInt(1 , clienteId);
 
 			rs = stmt.executeQuery();
 			
 			if(rs != null && rs.next()){
 			
 				m.setId(rs.getInt("id"));
-				m.setName(rs.getString("Nome"));
+				m.setName(rs.getString("nome"));
 				m.setTelefone(rs.getString("telefone"));
 				m.setEmail(rs.getString("email"));
 				m.setCpf(rs.getString("cpf"));

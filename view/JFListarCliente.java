@@ -9,13 +9,16 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.table.DefaultTableModel;
 
 import model.bean.Cliente;
-import model.bean.Filme;
 import model.dao.ClienteDAO;
-import model.dao.FilmeDAO;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -80,14 +83,61 @@ public class JFListarCliente extends JFrame {
 		scrollPane.setViewportView(jtCliente);
 		
 		btnCadastrar = new JButton("Cadastrar Cliente");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFCadastroCliente rm = new JFCadastroCliente();
+				rm.setVisible(true);
+				readJTable();
+			}
+		});
+		
 		btnCadastrar.setBounds(20, 376, 117, 23);
 		contentPane.add(btnCadastrar);
 		
 		btnEditar = new JButton("Editar Cliente");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = jtCliente.getSelectedRow();
+				
+				if(selectedRow != -1) {
+					
+					int id = (int) jtCliente.getValueAt(selectedRow, 0);
+					
+					JFEditarCliente af = new JFEditarCliente(id);
+					
+					af.setVisible(true);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um cliente");
+				}
+				
+				readJTable();	
+				
+			}
+		});
+		
 		btnEditar.setBounds(147, 376, 97, 23);
 		contentPane.add(btnEditar);
 		
 		btnExcluir = new JButton("Excluir Cliente");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = jtCliente.getSelectedRow();
+				
+				if(selectedRow != -1) {
+					
+					int id = (int) jtCliente.getValueAt(selectedRow, 0);
+					ClienteDAO dao = new ClienteDAO();
+					dao.remove(id);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um cliente");
+				}
+				
+				readJTable();	
+				
+			}
+		});
 		btnExcluir.setBounds(254, 376, 107, 23);
 		contentPane.add(btnExcluir);
 		

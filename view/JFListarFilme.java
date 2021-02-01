@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,6 +19,8 @@ import model.dao.FilmeDAO;
 
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JFListarFilme extends JFrame {
 
@@ -75,14 +79,58 @@ public class JFListarFilme extends JFrame {
 		scrollPane.setViewportView(jtFilme);
 		
 		btnCadastrar = new JButton("Adicionar Filme");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFCadastroFilme rm = new JFCadastroFilme();
+				rm.setVisible(true);
+				readJTable();
+			}
+		});
 		btnCadastrar.setBounds(30, 385, 122, 23);
 		contentPane.add(btnCadastrar);
 		
 		btnAlterar = new JButton("Editar Filme");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int selectedRow = jtFilme.getSelectedRow();
+				
+				if(selectedRow != -1) {
+					
+					int id = (int) jtFilme.getValueAt(selectedRow, 0);
+					
+					JFEditarFilme af = new JFEditarFilme();
+					
+					af.setVisible(true);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um filme");
+				}
+				
+				readJTable();
+				
+			}
+		});
 		btnAlterar.setBounds(162, 385, 89, 23);
 		contentPane.add(btnAlterar);
 		
 		btnExcluir = new JButton("Excluir Filme");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int selectedRow = jtFilme.getSelectedRow();
+				FilmeDAO dao = new FilmeDAO();
+				if(selectedRow != -1) {
+					
+					int id = (int) jtFilme.getValueAt(selectedRow, 0);
+					dao.remove(id);
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um filme");
+				}
+				
+				readJTable();
+			}
+		});
 		btnExcluir.setBounds(261, 385, 105, 23);
 		contentPane.add(btnExcluir);
 		
